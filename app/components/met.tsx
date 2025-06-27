@@ -1,0 +1,146 @@
+"use client";
+import React, { useRef, useState, useEffect } from "react";
+import { Meteors } from "../components/ui/meteors";
+
+export function MeteorsDemo() {
+const scrollRef = useRef<HTMLDivElement>(null);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const cards = [
+    {
+      title: "Frontend",
+      desc: ["HTML5", "CSS3", "JavaScript", "ES6+", "React.js", "Next.js"],
+    },
+    {
+      title: "Backend",
+      desc: ["Flask", "Express.js", "Node.js", "REST APIs"],
+    },
+    {
+      title: "Database",
+      desc: ["MongoDB", "PostgreSQL", "Redis", "MySQL"],
+    },
+    {
+      title: "Design",
+      desc: ["Figma", "Adobe XD", "UI/UX", "Prototyping"],
+    },
+    {
+      title: "Languages",
+      desc: ["C++", "Python", "JavaScript", "TypeScript", "R"],
+    },
+    {
+      title: "Tools",
+      desc: ["Git", "GitHub", "Docker", "Postman", "Vercel"],
+    },
+    {
+      title: "AI/ML",
+      desc: ["Scikit-Learn", "Pandas", "NumPy", "TensorFlow"],
+    },
+  ];
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const scrollSpeed = 1;
+    const intervalTime = 30;
+
+    const interval = setInterval(() => {
+      if (scrollContainer) {
+        if (
+          scrollContainer.scrollLeft + scrollContainer.clientWidth >=
+          scrollContainer.scrollWidth
+        ) {
+          scrollContainer.scrollLeft = 0;
+        } else {
+          scrollContainer.scrollLeft += scrollSpeed;
+        }
+      }
+    }, intervalTime);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div>
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16">
+        </div>
+
+        <div
+          className="overflow-x-auto w-full no-scrollbar"
+          ref={scrollRef}
+        >
+          <div className="flex gap-8 px-10 w-max pb-8">
+            {cards.map((card, index) => (
+              <div
+                key={index}
+                className="relative flex-shrink-0 w-[380px] h-auto group"
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                
+                {/* Main card */}
+                <div className="relative h-full bg-gray-900/80 backdrop-blur-xl rounded-3xl border border-gray-700/50 overflow-hidden transition-all duration-500 group-hover:border-gray-600/80 group-hover:scale-105 group-hover:shadow-2xl">
+                  
+                  
+                  {/* Content */}
+                  <div className="relative z-10 p-8 h-full flex flex-col">
+                    {/* Header */}
+                    <div className="flex items-center gap-4 mb-6">
+                      <h3 className="text-2xl font-bold text-white group-hover:text-gray-100 transition-colors">
+                        {card.title}
+                      </h3>
+                    </div>
+
+                    {/* Skills list */}
+                    <div className="flex-1 mb-6">
+                      <div className="flex flex-wrap gap-3">
+                        {card.desc.map((skill, idx) => (
+                          <div
+                            key={idx}
+                            className="group/skill relative bg-gray-900/60 backdrop-blur-sm rounded-lg px-4 py-2 text-sm text-gray-300 font-medium hover:text-white transition-all duration-300 cursor-pointer overflow-hidden"
+                          >
+                            {/* Animated border shimmer */}
+                            <div className="absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-transparent via-gray-600/50 to-transparent group-hover/skill:from-blue-400/80 group-hover/skill:via-purple-400/80 group-hover/skill:to-cyan-400/80 transition-all duration-300">
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/skill:translate-x-full transition-transform duration-1000 ease-out" />
+                              <div className="h-full w-full rounded-lg bg-gray-900/80" />
+                            </div>
+                            
+                            {/* Content */}
+                            <span className="relative z-10 transition-all duration-200">
+                              {skill}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Meteors - using your original component */}
+                  <Meteors number={100} />
+                  
+                  {/* Corner decoration */}
+                  <div className="absolute top-4 right-4 w-2 h-2 bg-white/20 rounded-full animate-pulse" />
+                  <div className="absolute bottom-4 left-4 w-1 h-1 bg-white/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        
+      </div>
+
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </div>
+  );
+}
