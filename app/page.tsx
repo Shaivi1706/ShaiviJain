@@ -1,38 +1,4 @@
-// "use client"
-
-// import Banner from './banner/page'
-// import {SparklesPreview} from './landingpage/page'
-// import {NavbarDemo} from './components/navbar';
-// import ProjectsPage from './projects/page';
-// import SkillsPage from './skills/page';
-// import About from './about/page';
-// import Contact from './contact/page';
-
-// export default function Home() {
-//   return (
-//    <>
-//       {/* Background Image Layer */}
-//       <div className="fixed inset-0 z-[-1] bg-universe"></div>
-
-//       {/* Foreground Content */}
-//       <div className="relative z-10">
-//         <NavbarDemo />
-        
-//         <section className="min-h-screen">
-//           <SparklesPreview />
-//           <About />
-//           <ProjectsPage />
-//           <SkillsPage />
-//           <Contact />
-//           {/* <Banner /> */}
-//         </section>
-//       </div>
-//     </>
-//   )
-// }
-
 "use client"
-import Banner from './banner/page'
 import LandingPage from './landingpage/page'
 import {NavbarDemo} from './components/navbar';
 import ProjectsPage from './projects/page';
@@ -138,24 +104,23 @@ export default function Home() {
       <div className="shooting-star"></div>
       
       {/* Scrollable Foreground Content */}
-      <div className="relative z-10 min-h-auto">
-        <NavbarDemo />
-        <section className="min-h-auto">
+      <NavbarDemo />
+      <div className="relative z-10 pt-[90px]">
+        <section className="min-h-screen" id="home">
           <LandingPage />
         </section>
-        <section className="min-h-auto">
+        <section className="min-h-screen" id="about">
           <About />
         </section>
-        <section className="min-h-auto">
+        <section className="min-h-auto" id="projects">
           <ProjectsPage />
         </section>
-        <section className="min-h-auto">
+        <section className="min-h-auto" id="skills">
           <SkillsPage />
         </section>
-        <section className="min-h-auto">
+        <section className="min-h-auto" id="contact">
           <Contact />
         </section>
-        {/* <Banner /> */}
       </div>
     </>
   )

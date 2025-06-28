@@ -6,36 +6,37 @@ export function MeteorsDemo() {
 const scrollRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const cards = [
-    {
-      title: "Frontend",
-      desc: ["HTML5", "CSS3", "JavaScript", "ES6+", "React.js", "Next.js"],
-    },
-    {
-      title: "Backend",
-      desc: ["Flask", "Express.js", "Node.js", "REST APIs"],
-    },
-    {
-      title: "Database",
-      desc: ["MongoDB", "PostgreSQL", "Redis", "MySQL"],
-    },
-    {
-      title: "Design",
-      desc: ["Figma", "Adobe XD", "UI/UX", "Prototyping"],
-    },
-    {
-      title: "Languages",
-      desc: ["C++", "Python", "JavaScript", "TypeScript", "R"],
-    },
-    {
-      title: "Tools",
-      desc: ["Git", "GitHub", "Docker", "Postman", "Vercel"],
-    },
-    {
-      title: "AI/ML",
-      desc: ["Scikit-Learn", "Pandas", "NumPy", "TensorFlow"],
-    },
-  ];
+const cards = [
+  {
+    title: "Languages & Scripting",
+    desc: ["C++", "Python", "JavaScript", "TypeScript", "R"],
+  },
+  {
+    title: "Web Development",
+    desc: [
+      "HTML5", "CSS3", "JavaScript", "ES6+", 
+      "React.js", "Next.js", 
+      "Node.js", "Express.js", "Flask",
+      "REST APIs"
+    ],
+  },
+  {
+    title: "Databases & Data Stores",
+    desc: ["MongoDB", "PostgreSQL", "MySQL"],
+  },
+  {
+    title: "AI / Machine Learning",
+    desc: ["Pandas", "NumPy", "Scikit-Learn", "TensorFlow"],
+  },
+  {
+    title: "DevOps & Tools",
+    desc: ["Git", "GitHub", "Docker", "Postman", "Vercel"],
+  },
+  {
+    title: "Design & Prototyping",
+    desc: ["Figma", "UI/UX", "Prototyping"],
+  },
+];
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;

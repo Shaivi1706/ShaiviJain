@@ -2,8 +2,10 @@ import { LensDemo } from "../components/lensdemo";
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen">
-      <h1 className="text-4xl font-bold text-center pt-10">Projects</h1>
+    <div className="min-h-auto">
+      <h1 className="text-4xl md:text-6xl font-extrabold text-center pt-10 bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent drop-shadow-md tracking-wide animate-fade-in">
+        <span className="inline-block mt-20 animate-glow">Projects</span>
+      </h1>
       <LensDemo />
     </div>
   );

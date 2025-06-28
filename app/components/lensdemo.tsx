@@ -8,54 +8,62 @@ import { cn } from "../lib/utils";
 export function LensDemo() {
   const [hovering, setHovering] = useState(false);
 
-  const projects = [
-    {
-        title: "Equilibrium",
-        image:
-        "https://images.unsplash.com/photo-1713869820987-519844949a8a?q=80&w=3500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        description:
-        "AI-powered career assistant built with Next.js, get smart job recommendations, resume insights, and personalized upskilling.",
-        list: ["Next.js", "Flask", "Nodejs", "TailWindCSS", "Cursera API", "PostgreSQL", "Gemini API"],
-    },
-    {
-        title: "HealthEase",
-        image:
-        "https://images.unsplash.com/photo-1713869820987-519844949a8a?q=80&w=3500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        description:
-        "A modern health management platform enabling patients and doctors to securely manage medical records, prescriptions, and reports. Includes AI-powered symptom checker, smart reminders, and integrated chatbot support.",
-        list: ["Next.js", "Gemini API", "Nodejs", "TailWindCSS"],
-    },
-    {
-        title: "InnerSpark",
-        image:
-        "https://images.unsplash.com/photo-1713869820987-519844949a8a?q=80&w=3500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        description:
-        "InnerSpark is a digital platform designed to support mental well-being by providing accessible tools for stress relief, emotional tracking, and personal growth. Our mission is to offer a safe, empathetic space where users can prioritize mental wellness and find community support.",
-        list: ["HTML", "CSS", "JavaScript"],
-    },
-    // add more as needed...
-    ];
+const projects = [
+  {
+    title: "Equilibrium",
+    image: "/equil.png",
+    description:
+      "AI-powered career assistant built with Next.js, get smart job recommendations, resume insights, and personalized upskilling.",
+    list: ["Next.js", "Flask", "TailWindCSS", "PostgreSQL", "Gemini API"],
+    code: "https://github.com/Shaivi1706/Equilibrium",
+    demo: "https://equilibrium-64uw.vercel.app",
+  },
+  {
+    title: "HealthEase",
+    image: "/health.png",
+    description:
+      "A modern health management platform enabling patients and doctors to securely manage medical records and reports. Includes AI-powered symptom checker and integrated chatbot support.",
+    list: ["Next.js", "Gemini API", "TailWindCSS"],
+    code: "https://github.com/Shaivi1706/HealthEase",
+    demo: "https://health-ease-five.vercel.app/",
+  },
+  {
+    title: "InnerSpark",
+    image: "/inner.png",
+    description:
+      "InnerSpark is a digital platform designed to support mental well-being by providing accessible tools for stress relief, emotional tracking, and personal growth.",
+    list: ["HTML", "CSS", "JavaScript"],
+    code: "https://github.com/Shaivi1706/InnerSpark-Mental-Health",
+    demo: "https://shaivi1706.github.io/InnerSpark-Mental-Health/",
+  },
+];
 
   return (
     <div>
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-3">
 
         {projects.map((proj, idx) => (
             <div
                 key={idx}
-                className="w-full relative rounded-3xl overflow-hidden max-w-md mx-auto bg-gradient-to-r from-[#1D2235] to-[#121318] p-8 my-10"
+                className="w-auto relative rounded-3xl overflow-hidden max-w-md mx-auto bg-gradient-to-r from-[#1D2235] to-[#121318] p-8 my-10"
             >
                 <Rays />
                 <Beams />
                 <div className="relative z-10">
                 <Lens hovering={hovering} setHovering={setHovering}>
-                    <img
+                    {/* <img
                     src={proj.image}
                     alt={proj.title}
                     width={500}
-                    height={500}
+                    height={200}
                     className="rounded-2xl"
+                    /> */}
+                    <img
+                      src={proj.image}
+                      alt={proj.title}
+                      className="rounded-xl h-40 w-full object-cover"
                     />
+
                 </Lens>
                 <motion.div
                     animate={{
@@ -68,15 +76,36 @@ export function LensDemo() {
                     </h2>
                     <p className="text-neutral-200 text-left mt-4">{proj.description}</p>
 
-                    <div className="grid grid-cols-3 text-neutral-400 text-sm mt-4 list-disc list-inside space-y-1">
-                    {proj.list.map((item, i) => (
-                        <button key={i} className="border-1 rounded-md mx-2 my-1 w-auto">{item}</button>
-                    ))}
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6">
+                      {proj.list.map((item, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 w-fit rounded-full text-sm text-blue-200 border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 hover:scale-105 transition-all duration-300 shadow-md shadow-blue-500/10 backdrop-blur-sm"
+                        >
+                          {item}
+                        </span>
+                      ))}
                     </div>
 
-                    <div className="grid grid-cols-2 mt-6 mx-auto">
-                    <button className="px-4 py-1 w-1/2 rounded-lg border border-gray-500 text-gray-300 hover:bg-gray-700 transition">Code</button>
-                    <button className="px-4 py-1 w-1/2 mx-20 rounded-lg border border-gray-500 text-gray-300 hover:bg-gray-700 transition">Demo</button>
+
+                    <div className="grid grid-cols-2 mt-4 mx-auto gap-4">
+                      <a
+                        href={proj.code}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative inline-block w-full text-center rounded-lg px-4 py-2 text-sm font-medium text-blue-200 transition-all duration-300 border border-blue-500/40 bg-blue-500/10 hover:bg-blue-500/20 hover:scale-[1.03] hover:shadow-[0_0_12px_#3b82f6] before:absolute before:inset-0 before:rounded-lg before:border before:border-blue-400/40 before:opacity-0 hover:before:opacity-100 before:animate-border-move overflow-hidden"
+                      >
+                        <span className="relative z-10">Code</span>
+                      </a>
+
+                      <a
+                        href={proj.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative inline-block w-full text-center rounded-lg px-4 py-2 text-sm font-medium text-blue-200 transition-all duration-300 border border-blue-500/40 bg-blue-500/10 hover:bg-blue-500/20 hover:scale-[1.03] hover:shadow-[0_0_12px_#3b82f6] before:absolute before:inset-0 before:rounded-lg before:border before:border-blue-400/40 before:opacity-0 hover:before:opacity-100 before:animate-border-move overflow-hidden"
+                      >
+                        <span className="relative z-10">Demo</span>
+                      </a>
                     </div>
                 </motion.div>
                 </div>
