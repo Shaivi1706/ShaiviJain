@@ -10,7 +10,6 @@ import {
 
 import React, { useRef, useState } from "react";
 
-
 interface NavbarProps {
   children: React.ReactNode;
   className?: string;
@@ -46,7 +45,6 @@ interface MobileNavMenuProps {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
-  onClose: () => void;
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
@@ -195,7 +193,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
@@ -232,21 +229,21 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-  <a
-    href="#"
-    className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-xl font-normal text-black"
-  >
-    {/* <img
-      src="https://assets.aceternity.com/logo-dark.png"
-      alt="logo"
-      width={30}
-      height={30}
-    /> */}
-    <span className="relative font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200  animate-text-glow">
-      Shaivi Jain
-    </span>
-  </a>
-);
+    <a
+      href="#"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-xl font-normal text-black"
+    >
+      {/* <img
+        src="https://assets.aceternity.com/logo-dark.png"
+        alt="logo"
+        width={30}
+        height={30}
+      /> */}
+      <span className="relative font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 animate-text-glow">
+        Shaivi Jain
+      </span>
+    </a>
+  );
 };
 
 export const NavbarButton = ({

@@ -119,10 +119,10 @@ export default function Contact() {
           <div className="space-y-8">
             <div>
               <h2 className="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">
-                Let's Connect
+                Let&apos;s Connect
               </h2>
               <p className="text-blue-200/80 text-lg">
-                Ready to bring your ideas to life? Drop me a message and let's create something amazing together.
+                Ready to bring your ideas to life? Drop me a message and let&apos;s create something amazing together.
               </p>
             </div>
             
@@ -258,7 +258,7 @@ export default function Contact() {
             </button>
 
             <p className="text-sm text-blue-200/60 text-center">
-              Your message will be sent directly to my email. I'll get back to you soon!
+              Your message will be sent directly to my email. I&apos;ll get back to you soon!
             </p>
           </div>
         </div>
@@ -287,7 +287,7 @@ export default function Contact() {
               
               <h3 className="text-2xl font-bold mb-2 text-blue-100">Message Sent!</h3>
               <p className="text-blue-200/70 mb-6">
-                Thank you for reaching out! I'll get back to you within 24 hours.
+                Thank you for reaching out! I&apos;ll get back to you within 24 hours.
               </p>
               
               <button

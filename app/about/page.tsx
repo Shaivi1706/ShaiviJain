@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function About() {
@@ -63,7 +62,7 @@ export default function About() {
           >
             Welcome to my little corner of the{" "}
             <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent font-extrabold animate-glow">
-              universe, it's great to have you here!
+              universe, it&apos;s great to have you here!
             </span>
           </motion.h1>
 
@@ -74,7 +73,7 @@ export default function About() {
             className="space-y-4 text-sm lg:text-[14px] leading-relaxed text-gray-200 backdrop-blur-sm bg-black/20 rounded-2xl p-6 border border-white/10"
           >
             <p>
-              I'm{" "}
+              I&apos;m{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent font-bold text-xl lg:text-2xl animate-glow">
                 Shaivi Jain
               </span>
@@ -82,14 +81,14 @@ export default function About() {
               <span className="bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent font-semibold">
                 Computer Science (AI) student at IGDTUW
               </span>{" "}
-              who's passionate about turning ideas into{" "}
+              who&apos;s passionate about turning ideas into{" "}
               <span className="bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent font-semibold">
                 intuitive digital experiences
               </span>
               . I spend most of my time diving into web development, designing sleek UIs, building meaningful platforms, and blending logic with creativity.
               
               <br/><br/>
-              Alongside my love for clean frontends, I'm actively exploring the world of{" "}
+              Alongside my love for clean frontends, I&apos;m actively exploring the world of{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent font-semibold">
                 Artificial Intelligence,
               </span>{" "}
@@ -100,7 +99,7 @@ export default function About() {
               .
 
             <br/><br/>
-              I'm also sharpening my{" "}
+              I&apos;m also sharpening my{" "}
               <span className="bg-gradient-to-r from-orange-300 to-red-300 bg-clip-text text-transparent font-semibold">
                 Data Structures & Algorithms
               </span>{" "}
@@ -111,7 +110,7 @@ export default function About() {
               , where I get to bring ambitious ideas to life under pressure.
             
             <br/><br/>
-              I've worked on projects that range from{" "}
+              I&apos;ve worked on projects that range from{" "}
               <span className="bg-gradient-to-r from-pink-300 to-red-300 bg-clip-text text-transparent font-semibold">
                 women-centric health platforms
               </span>{" "}
@@ -130,7 +129,7 @@ export default function About() {
               .
             
             <br/><br/>
-              Outside of code, I'm probably nose-deep in a{" "}
+              Outside of code, I&apos;m probably nose-deep in a{" "}
               <span className="bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent font-semibold">
                 novel
               </span>
@@ -140,11 +139,11 @@ export default function About() {
               </span>
               , or dreaming up my next big project.
             
-              The universe reminds me that there's always more to learn, more to build, and more to imagine{" "}
+              The universe reminds me that there&apos;s always more to learn, more to build, and more to imagine{" "}
               <span className="inline-block animate-pulse text-2xl">🌌</span>
             
             <br/>
-              If you're into{" "}
+              If you&apos;re into{" "}
               <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent font-semibold">
                 thoughtful tech
               </span>
@@ -152,7 +151,7 @@ export default function About() {
               <span className="bg-gradient-to-r from-pink-300 to-red-300 bg-clip-text text-transparent font-semibold">
                 purpose-driven design
               </span>
-              , or just good conversation — let's connect.{" "}
+              , or just good conversation — let&apos;s connect.{" "}
             </p>
           </motion.div>
 

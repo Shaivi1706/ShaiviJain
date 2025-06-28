@@ -3,40 +3,40 @@ import React, { useRef, useState, useEffect } from "react";
 import { Meteors } from "../components/ui/meteors";
 
 export function MeteorsDemo() {
-const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-const cards = [
-  {
-    title: "Languages & Scripting",
-    desc: ["C++", "Python", "JavaScript", "TypeScript", "R"],
-  },
-  {
-    title: "Web Development",
-    desc: [
-      "HTML5", "CSS3", "JavaScript", "ES6+", 
-      "React.js", "Next.js", 
-      "Node.js", "Express.js", "Flask",
-      "REST APIs"
-    ],
-  },
-  {
-    title: "Databases & Data Stores",
-    desc: ["MongoDB", "PostgreSQL", "MySQL"],
-  },
-  {
-    title: "AI / Machine Learning",
-    desc: ["Pandas", "NumPy", "Scikit-Learn", "TensorFlow"],
-  },
-  {
-    title: "DevOps & Tools",
-    desc: ["Git", "GitHub", "Docker", "Postman", "Vercel"],
-  },
-  {
-    title: "Design & Prototyping",
-    desc: ["Figma", "UI/UX", "Prototyping"],
-  },
-];
+  const cards = [
+    {
+      title: "Languages & Scripting",
+      desc: ["C++", "Python", "JavaScript", "TypeScript", "R"],
+    },
+    {
+      title: "Web Development",
+      desc: [
+        "HTML5", "CSS3", "JavaScript", "ES6+",
+        "React.js", "Next.js",
+        "Node.js", "Express.js", "Flask",
+        "REST APIs"
+      ],
+    },
+    {
+      title: "Databases & Data Stores",
+      desc: ["MongoDB", "PostgreSQL", "MySQL"],
+    },
+    {
+      title: "AI / Machine Learning",
+      desc: ["Pandas", "NumPy", "Scikit-Learn", "TensorFlow"],
+    },
+    {
+      title: "DevOps & Tools",
+      desc: ["Git", "GitHub", "Docker", "Postman", "Vercel"],
+    },
+    {
+      title: "Design & Prototyping",
+      desc: ["Figma", "UI/UX", "Prototyping"],
+    },
+  ];
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -46,15 +46,13 @@ const cards = [
     const intervalTime = 30;
 
     const interval = setInterval(() => {
-      if (scrollContainer) {
-        if (
-          scrollContainer.scrollLeft + scrollContainer.clientWidth >=
-          scrollContainer.scrollWidth
-        ) {
-          scrollContainer.scrollLeft = 0;
-        } else {
-          scrollContainer.scrollLeft += scrollSpeed;
-        }
+      if (
+        scrollContainer.scrollLeft + scrollContainer.clientWidth >=
+        scrollContainer.scrollWidth
+      ) {
+        scrollContainer.scrollLeft = 0;
+      } else {
+        scrollContainer.scrollLeft += scrollSpeed;
       }
     }, intervalTime);
 
@@ -64,25 +62,21 @@ const cards = [
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-        </div>
+        <div className="text-center mb-16"></div>
 
-        <div
-          className="overflow-x-auto w-full no-scrollbar"
-          ref={scrollRef}
-        >
+        <div className="overflow-x-auto w-full no-scrollbar" ref={scrollRef}>
           <div className="flex gap-8 px-10 w-max pb-8">
             {cards.map((card, index) => (
               <div
                 key={index}
-                className="relative flex-shrink-0 w-[380px] h-auto group"
+                className={`relative flex-shrink-0 w-[380px] h-auto group transition-all duration-300 ${
+                  hoveredCard === index ? "scale-105 ring-4 ring-purple-500/40" : ""
+                }`}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                
                 {/* Main card */}
-                <div className="relative h-full bg-gray-900/80 backdrop-blur-xl rounded-3xl border border-gray-700/50 overflow-hidden transition-all duration-500 group-hover:border-gray-600/80 group-hover:scale-105 group-hover:shadow-2xl">
-                  
+                <div className="relative h-full bg-gray-900/80 backdrop-blur-xl rounded-3xl border border-gray-700/50 overflow-hidden transition-all duration-500 group-hover:shadow-2xl">
                   
                   {/* Content */}
                   <div className="relative z-10 p-8 h-full flex flex-col">
@@ -117,9 +111,9 @@ const cards = [
                     </div>
                   </div>
 
-                  {/* Meteors - using your original component */}
+                  {/* Meteors */}
                   <Meteors number={100} />
-                  
+
                   {/* Corner decoration */}
                   <div className="absolute top-4 right-4 w-2 h-2 bg-white/20 rounded-full animate-pulse" />
                   <div className="absolute bottom-4 left-4 w-1 h-1 bg-white/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
@@ -128,15 +122,13 @@ const cards = [
             ))}
           </div>
         </div>
-
-        
       </div>
 
       <style jsx>{`
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
-        
+
         .no-scrollbar {
           -ms-overflow-style: none;
           scrollbar-width: none;
