@@ -6,6 +6,280 @@
   background-position: center;
 }
 
+.bg-hi {
+  background-image: url('./assets/banner-bg.png');
+  background-size: cover;
+  background-position: center;
+  /* background-repeat: no-repeat; */
+  background-attachment: fixed; /* 🚨 This is what makes it stay put */
+  height: 100vh;
+}
+
+.bg-universe {
+  background: linear-gradient(
+    to bottom,
+    #0a0a2e 0%,
+    #16213e 20%,
+    #3d2a78 50%,
+    #6b46c1 70%,
+    #8b5cf6 85%,
+    #2d1a4f 100%
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}
+
+/* Mountains silhouette - Fixed positioning */
+.mountains {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 30vh;
+  background: linear-gradient(45deg, #000000 30%, #1a1a1a 70%);
+  clip-path: polygon(
+    0% 100%, 
+    0% 70%, 
+    15% 50%, 
+    30% 40%, 
+    45% 60%, 
+    60% 30%, 
+    75% 45%, 
+    90% 35%, 
+    100% 50%, 
+    100% 100%
+  );
+  z-index: -9;
+  pointer-events: none;
+}
+
+/* Blue celestial object - Fixed positioning */
+.blue-celestial {
+  position: fixed;
+  top: 15vh;
+  left: 6vw;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #60a5fa 0%, #3b82f6 30%, #1e40af 70%, transparent 100%);
+  box-shadow: 
+    0 0 40px #60a5fa,
+    0 0 80px #3b82f6,
+    0 0 120px #1e40af;
+  animation: pulse 3s ease-in-out infinite;
+  z-index: -8;
+  pointer-events: none;
+}
+
+/* Stars - Fixed positioning */
+.star {
+  position: fixed;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s ease-in-out infinite alternate;
+  z-index: -7;
+  pointer-events: none;
+}
+
+.star:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+.star:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+.star:nth-child(4n) {
+  animation-delay: 1.5s;
+}
+
+/* Different star sizes */
+.star-small {
+  width: 2px;
+  height: 2px;
+  box-shadow: 0 0 6px white;
+}
+
+.star-medium {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 10px white;
+}
+
+.star-large {
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 0 15px white;
+}
+
+/* Shooting stars - Fixed positioning */
+.shooting-star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(45deg, #60a5fa, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #60a5fa;
+  animation: shoot 3s linear infinite;
+  opacity: 0;
+  z-index: -6;
+  pointer-events: none;
+}
+
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, #60a5fa, transparent);
+  transform: rotate(45deg);
+  transform-origin: 0 0;
+}
+
+.shooting-star:nth-child(1) {
+  top: 20vh;
+  left: 10vw;
+  animation-delay: 0s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 60vh;
+  left: 80vw;
+  animation-delay: 1s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 30vh;
+  left: 70vw;
+  animation-delay: 2s;
+}
+
+.shooting-star:nth-child(4) {
+  top: 80vh;
+  left: 20vw;
+  animation-delay: 0.5s;
+}
+
+/* Aurora effect - Fixed positioning */
+.aurora {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(147, 51, 234, 0.1) 25%, 
+    rgba(59, 130, 246, 0.1) 50%, 
+    rgba(147, 51, 234, 0.1) 75%, 
+    transparent 100%
+  );
+  animation: aurora 8s ease-in-out infinite;
+  z-index: -5;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes twinkle {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 
+      0 0 40px #60a5fa,
+      0 0 80px #3b82f6,
+      0 0 120px #1e40af;
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 
+      0 0 60px #60a5fa,
+      0 0 120px #3b82f6,
+      0 0 180px #1e40af;
+  }
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px) translateY(-50px);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(200px) translateY(200px);
+  }
+}
+
+@keyframes aurora {
+  0%, 100% { opacity: 0.3; transform: skewX(0deg); }
+  50% { opacity: 0.6; transform: skewX(5deg); }
+}
+
+/* Animations */
+@keyframes twinkle {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 
+      0 0 40px #60a5fa,
+      0 0 80px #3b82f6,
+      0 0 120px #1e40af;
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 
+      0 0 60px #60a5fa,
+      0 0 120px #3b82f6,
+      0 0 180px #1e40af;
+  }
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px) translateY(-50px);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(200px) translateY(200px);
+  }
+}
+
+@keyframes aurora {
+  0%, 100% { opacity: 0.3; transform: skewX(0deg); }
+  50% { opacity: 0.6; transform: skewX(5deg); }
+}
 @theme inline {
   --animate-meteor-effect: meteor 5s linear infinite;
   

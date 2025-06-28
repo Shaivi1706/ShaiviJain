@@ -1,462 +1,166 @@
-// //app/landingpage/page.tsx
-// "use client";
-// import React, {useState, useEffect} from "react";
-// import { SparklesCore } from "../components/ui/sparkles";
-// import { Github, Twitter, Linkedin } from "lucide-react";
-// import { motion } from "framer-motion";
+import React, { useState, useEffect } from 'react';
 
-// export function SparklesPreview() {
-//   const [isDarkMode, setIsDarkMode] = useState(false);
-
-//   useEffect(() => {
-//     // Check system preference or class on <html>
-//     const checkDarkMode = () => {
-//       if (
-//         window.matchMedia &&
-//         window.matchMedia("(prefers-color-scheme: dark)").matches
-//       ) {
-//         setIsDarkMode(true);
-//       } else {
-//         setIsDarkMode(false);
-//       }
-
-//       // Optional: Check for Tailwind 'dark' class on <html>
-//       if (document.documentElement.classList.contains("dark")) {
-//         setIsDarkMode(true);
-//       }
-//     };
-
-//     checkDarkMode();
-//     // Add listener for changes in system theme
-//     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", checkDarkMode);
-        
-//     return () => {
-//       window
-//         .matchMedia("(prefers-color-scheme: dark)")
-//         .removeEventListener("change", checkDarkMode);
-//     };
-//   }, []);
-//   return (
-//     <div className="h-[38rem] w-full bg-white dark:bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
-        
-//       <div className="flex items-end space-x-2">
-//         <span className="text-base font-bold md:text-xl lg:text-3xl text-black dark:text-white">Hi, I'm</span>
-//         {/* <h1 className="text-3xl md:text-7xl lg:text-9xl font-bold text-black dark:text-white"> */}
-//           <motion.h1
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.6 }}
-//             className="text-6xl font-extrabold text-black dark:text-white"
-//           >
-//             Shaivi Jain
-//           </motion.h1>
-//         {/* </h1> */}
-//       </div>
-//       <p className="text-lg md:text-xl lg:text-xl text-center font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4 mb-2">
-//         Crafting impactful digital experiences with precision, purpose,
-//         and passion. <br /> Explore a portfolio where design meets direction.
-//       </p>
-//       <div className="w-[60rem] h-2/5 relative">
-//         {/* Adjusted Gradients for white background */}
-//         <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-black to-transparent h-[2px] w-3/4 blur-sm opacity-30" />
-//         <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-black to-transparent h-px w-3/4 opacity-20" />
-//         <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-gray-800 to-transparent h-[5px] w-1/4 blur-sm opacity-20" />
-//         <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-gray-800 to-transparent h-px w-1/4 opacity-20" />
-
-//         {/* Core Sparkles Component */}
-//         <SparklesCore
-//           background="transparent"
-//           minSize={0.9}
-//           maxSize={1.5}
-//           particleDensity={1200}
-//           className="w-full h-full"
-//           particleColor={isDarkMode ? "#FFFFFF" : "#000000"}
-//         />
-
-//         {/* Soft radial fade to blend sparkles into white */}
-//         <div className="absolute inset-0 w-full h-full bg-white dark:bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
-//       </div>
-      
-
-//       {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-space-purple/20 blur-[100px] pointer-events-none"></div> */}
-
-//       <div className="flex space-x-6 justify-center -mb-12 ">
-//       <a
-//         href="https://github.com/Shaivi1706"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         className="text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors duration-200"
-//       >
-//         <Github size={28} />
-//       </a>
-//       <a
-//         href="https://twitter.com/your_handle"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         className="text-gray-600 hover:text-sky-500 dark:text-gray-300 dark:hover:text-sky-400 transition-colors duration-200"
-//       >
-//         <Twitter size={28} />
-//       </a>
-//       <a
-//         href="https://linkedin.com/in/yourprofile"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200"
-//       >
-//         <Linkedin size={28} />
-//       </a>
-//     </div>
-//     </div>
-//   );
-// }
-"use client";
-import React, {useState, useEffect} from "react";
-import { SparklesCore } from "../components/ui/sparkles";
-import { Github, Twitter, Linkedin } from "lucide-react";
-import { motion } from "framer-motion";
-
-// Define the skill type
-interface Skill {
-  name: string;
-  color: string;
-  initialX: number;
-  initialY: number;
-  duration: number;
-  delay: number;
-}
-
-// Generate random positions and animations for skills
-const generateRandomSkills = (): Skill[] => {
-  const skillNames = [
-    { name: "HTML", color: "#E34F26" },
-    { name: "CSS", color: "#1572B6" },
-    { name: "JavaScript", color: "#F7DF1E" },
-    { name: "React", color: "#61DAFB" },
-    { name: "Next.js", color: "#000000" },
-    { name: "TypeScript", color: "#3178C6" },
-    { name: "Python", color: "#3776AB" },
-    { name: "C++", color: "#00599C" },
-    { name: "R", color: "#276DC3" },
-    { name: "Node.js", color: "#339933" },
-    { name: "Express.js", color: "#000000" },
-    { name: "Flask", color: "#000000" },
-    { name: "MongoDB", color: "#47A248" },
-    { name: "PostgreSQL", color: "#336791" },
-    { name: "Git", color: "#F05032" },
-    { name: "Docker", color: "#2496ED" },
-    { name: "AI/ML", color: "#FF6F00" },
-    { name: "UI/UX", color: "#FF0080" },
-    { name: "Figma", color: "#F24E1E" },
-    { name: "Tailwind", color: "#06B6D4" }
-  ];
-
-  return skillNames.map((skill, index) => ({
-    ...skill,
-    initialX: Math.random() * 100, // Random percentage across screen width
-    initialY: Math.random() * 100, // Random percentage across screen height
-    duration: 15 + Math.random() * 20, // Random duration between 15-35 seconds
-    delay: Math.random() * 10 // Random delay up to 10 seconds
-  }));
-};
-
-export function SparklesPreview() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [skills, setSkills] = useState<Skill[]>([]);
+const LandingPage = () => {
+  const [moonExpanded, setMoonExpanded] = useState(false);
+  const [textVisible, setTextVisible] = useState(false);
+  const [typedText, setTypedText] = useState('');
+  
+  const fullText = "Hi, I'm Shaivi Jain";
+  const subtitle = "Crafting impactful digital experiences with precision, purpose, and passion. Explore a portfolio where design meets direction.";
 
   useEffect(() => {
-    setSkills(generateRandomSkills());
-  }, []);
+    // Start moon expansion after component mounts
+    const moonTimer = setTimeout(() => {
+      setMoonExpanded(true);
+    }, 500);
 
-  useEffect(() => {
-    // Check system preference or class on <html>
-    const checkDarkMode = () => {
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        setIsDarkMode(true);
-      } else {
-        setIsDarkMode(false);
-      }
+    // Start text animation after moon expands
+    const textTimer = setTimeout(() => {
+      setTextVisible(true);
+    }, 1500);
 
-      // Optional: Check for Tailwind 'dark' class on <html>
-      if (document.documentElement.classList.contains("dark")) {
-        setIsDarkMode(true);
-      }
-    };
-
-    checkDarkMode();
-    // Add listener for changes in system theme
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", checkDarkMode);
-        
     return () => {
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .removeEventListener("change", checkDarkMode);
+      clearTimeout(moonTimer);
+      clearTimeout(textTimer);
     };
   }, []);
 
-  // Generate random floating animation
-  const generateRandomMotion = () => {
-    return {
-      x: [
-        0,
-        Math.random() * 200 - 100,
-        Math.random() * 200 - 100,
-        Math.random() * 200 - 100,
-        0
-      ],
-      y: [
-        0,
-        Math.random() * 200 - 100,
-        Math.random() * 200 - 100,
-        Math.random() * 200 - 100,
-        0
-      ],
-      rotate: [0, Math.random() * 360],
-    };
-  };
+  useEffect(() => {
+    if (textVisible) {
+      let index = 0;
+      const typeTimer = setInterval(() => {
+        if (index <= fullText.length) {
+          setTypedText(fullText.slice(0, index));
+          index++;
+        } else {
+          clearInterval(typeTimer);
+        }
+      }, 100);
+
+      return () => clearInterval(typeTimer);
+    }
+  }, [textVisible]);
 
   return (
-      <div className="h-[38rem] w-full min-h-screen  bg-white dark:bg-black flex flex-col items-center justify-center overflow-hidden rounded-md relative">
-        
-        {/* Sparkles Background - Lower z-index */}
-        <div className="absolute inset-0 w-full h-full z-0">
-          <div className="w-full h-full relative">
-            {/* Adjusted Gradients for white background */}
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-black to-transparent h-[2px] w-3/4 blur-sm opacity-30" />
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-black to-transparent h-px w-3/4 opacity-20" />
-            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-gray-800 to-transparent h-[5px] w-1/4 blur-sm opacity-20" />
-            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-gray-800 to-transparent h-px w-1/4 opacity-20" />
-
-            {/* Soft radial fade to blend sparkles */}
-            <div className="absolute inset-0 w-full h-full bg-white dark:bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
-          </div>
-        </div>
-
-        {/* Floating Skills - Higher z-index */}
-        <div className="absolute inset-0 w-full h-full z-20">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              className="absolute"
-              style={{
-                left: `${skill.initialX}%`,
-                top: `${skill.initialY}%`,
-              }}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                ...generateRandomMotion(),
-              }}
-              transition={{
-                opacity: { duration: 1, delay: skill.delay },
-                scale: { duration: 0.5, delay: skill.delay },
-                x: {
-                  duration: skill.duration,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                },
-                y: {
-                  duration: skill.duration * 0.8,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
-                },
-                rotate: {
-                  duration: skill.duration * 2,
-                  repeat: Infinity,
-                  ease: "linear",
-                },
-              }}
-              whileHover={{
-                scale: 1.2,
-                transition: { duration: 0.2 }
-              }}
-            >
-              <div
-                className="px-3 py-1.5 rounded-full text-xs font-semibold border backdrop-blur-sm cursor-pointer transition-all duration-300 hover:shadow-lg"
-                style={{
-                  backgroundColor: `${skill.color}15`,
-                  borderColor: skill.color,
-                  color: isDarkMode 
-                    ? '#ffffff' 
-                    : skill.color === '#000000' 
-                      ? '#333333' 
-                      : skill.color,
-                  transform: 'translate(-50%, -50%)', // Center the badge on its position
-                }}
-              >
-                {skill.name}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        
-        {/* Main Content - Highest z-index */}
-        {/* <div className="flex items-end space-x-2 z-30 relative">
-          <span className="text-base font-bold md:text-xl lg:text-3xl text-black dark:text-white">Hi, I'm</span>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-6xl font-extrabold text-black dark:text-white"
+    <div className="relative min-h-screen flex items-start justify-center overflow-hidden pt-32 md:pt-32">
+      {/* Floating Code Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute text-blue-300/20 text-xs font-mono animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
           >
-            Shaivi Jain
-          </motion.h1>
-        </div>
-        
-        <p className="text-lg md:text-xl lg:text-xl text-center font-medium leading-relaxed text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mt-4 mb-8 z-30 relative">
-          Crafting impactful digital experiences with precision, purpose,
-          and passion. <br /> Explore a portfolio where design meets direction.
-        </p> */}
-
-        <div className="relative h-[100vh] w-full bg-white dark:bg-black flex flex-col items-center justify-center overflow-hidden">
-  <div className="relative h-[100vh] w-full bg-white dark:bg-black flex flex-col items-center justify-center overflow-hidden">
-
-  {/* MAIN TEXT */}
-  <div className="z-30 text-center px-4">
-    <div className="flex flex-col items-center">
-      <div className="flex items-end space-x-2">
-        <span className="text-base font-bold md:text-xl lg:text-3xl text-black dark:text-white">
-          Hi, I'm
-        </span>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-6xl font-extrabold text-black dark:text-white"
-        >
-          Shaivi Jain
-        </motion.h1>
+            {['{ }', '< />', '&&', '||', '=>', '!=', '==', 'fn()', '[]', '++'][Math.floor(Math.random() * 10)]}
+          </div>
+        ))}
       </div>
 
-      <p className="text-lg md:text-xl lg:text-xl font-medium text-gray-700 dark:text-gray-300 mt-4 max-w-3xl leading-relaxed">
-        Crafting impactful digital experiences with precision, purpose,<br />
-        and passion. Explore a portfolio where design meets direction.
-      </p>
-
-      {/* SOCIAL ICONS */}
-      <div className="flex space-x-6 justify-center mt-6">
-        {/* your social icons */}
-      </div>
-    </div>
-  </div>
-
-  {/* SPARKLES LAYER - Below the text only */}
-  <div className="absolute bottom-0 w-full h-[250px] z-10">
-    <div className="relative w-full h-full">
-      <SparklesCore
-        background="transparent"
-        minSize={0.9}
-        maxSize={1.5}
-        particleDensity={1200}
-        className="w-full h-full"
-        particleColor={isDarkMode ? "#ffffff" : "#000000"}
-      />
-
-      {/* U-shaped mask to make sparkles look curved */}
-      <div className="absolute inset-0 bg-white dark:bg-black [mask-image:radial-gradient(300px_150px_at_center,white,transparent)]"></div>
-    </div>
-  </div>
-</div>
-
-  {/* Floating Skills */}
-  <div className="absolute inset-0 z-10 pointer-events-none">
-    {skills.map((skill) => (
-      <motion.div
-        key={skill.name}
-        className="absolute"
-        style={{
-          left: `${skill.initialX}%`,
-          top: `${skill.initialY}%`,
-          transform: 'translate(-50%, -50%)',
-        }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-          ...generateRandomMotion(),
-        }}
-        transition={{
-          opacity: { duration: 1, delay: skill.delay },
-          scale: { duration: 0.5, delay: skill.delay },
-          x: {
-            duration: skill.duration,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          },
-          y: {
-            duration: skill.duration * 0.8,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          },
-          rotate: {
-            duration: skill.duration * 2,
-            repeat: Infinity,
-            ease: "linear",
-          },
-        }}
-        whileHover={{
-          scale: 1.2,
-          transition: { duration: 0.2 }
-        }}
+      {/* Main Moon Element */}
+      <div 
+        className={`relative transition-all duration-2000 ease-out ${
+          moonExpanded 
+            ? 'w-[500px] h-[500px] md:w-[700px] md:h-[700px]' 
+            : 'w-12 h-12'
+        }`}
       >
-        <div
-          className="px-3 py-1.5 rounded-full text-xs font-semibold border backdrop-blur-sm cursor-pointer transition-all duration-300 hover:shadow-lg"
+        {/* Moon Glow */}
+        <div 
+          className={`absolute inset-0 rounded-full transition-all duration-2000 ease-out ${
+            moonExpanded 
+              ? 'bg-gradient-radial from-blue-400/30 via-purple-500/20 to-transparent blur-xl' 
+              : 'bg-blue-400/50 blur-sm'
+          }`}
           style={{
-            backgroundColor: `${skill.color}15`,
-            borderColor: skill.color,
-            color: isDarkMode 
-              ? '#ffffff' 
-              : skill.color === '#000000' 
-                ? '#333333' 
-                : skill.color,
+            background: moonExpanded 
+              ? 'radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, rgba(147, 51, 234, 0.2) 40%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(96, 165, 250, 0.8) 0%, transparent 70%)'
+          }}
+        />
+        
+        {/* Moon Surface */}
+        <div 
+          className={`relative rounded-full transition-all duration-2000 ease-out overflow-hidden ${
+            moonExpanded 
+              ? 'bg-gradient-radial from-slate-900/80 via-slate-800/60 to-transparent backdrop-blur-sm border border-blue-400/30' 
+              : 'bg-blue-400'
+          }`}
+          style={{
+            width: '100%',
+            height: '100%',
+            background: moonExpanded 
+              ? 'radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, rgba(15, 23, 42, 0.8) 40%, rgba(15, 23, 42, 0.9) 100%)'
+              : 'radial-gradient(circle, #60a5fa 0%, #3b82f6 100%)'
           }}
         >
-          {skill.name}
+          {/* Content Container */}
+          {moonExpanded && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
+              {/* Glowing Name */}
+              <div className="text-center mb-8">
+                <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent mb-4">
+                  {typedText}
+                  <span className="animate-pulse">|</span>
+                </h1>
+                
+                {/* Subtitle with delay */}
+                <p 
+                  className={`text-lg md:text-xl text-blue-200/80 max-w-2xl leading-relaxed transition-all duration-1000 ${
+                    typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                  style={{ transitionDelay: '1s' }}
+                >
+                  {subtitle}
+                </p>
+              </div>
+
+              
+            </div>
+          )}
+
+          {/* Moon Surface Details (when expanded) */}
+          {moonExpanded && (
+            <>
+              {/* Crater effects */}
+              <div className="absolute top-1/4 left-1/3 w-8 h-8 bg-slate-700/40 rounded-full blur-sm" />
+              <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-slate-700/30 rounded-full blur-sm" />
+              <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-slate-700/50 rounded-full blur-sm" />
+              
+              {/* Particle effects around moon */}
+              {[...Array(20)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 bg-blue-400/60 rounded-full animate-pulse"
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 3}s`,
+                    animationDuration: `${2 + Math.random() * 2}s`
+                  }}
+                />
+              ))}
+            </>
+          )}
         </div>
-      </motion.div>
-    ))}
-  </div>
-
-  {/* Main Centered Content */}
-  <div className="relative z-30 text-center px-4">
-    <div className="flex flex-col items-center">
-
-      <div className="flex space-x-6 justify-center mt-6">
-        <a
-          href="https://github.com/Shaivi1706"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors duration-200"
-        >
-          <Github size={28} />
-        </a>
-        <a
-          href="https://twitter.com/your_handle"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-600 hover:text-sky-500 dark:text-gray-300 dark:hover:text-sky-400 transition-colors duration-200"
-        >
-          <Twitter size={28} />
-        </a>
-        <a
-          href="https://linkedin.com/in/yourprofile"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200"
-        >
-          <Linkedin size={28} />
-        </a>
+        
+        {/* Orbital Rings */}
+        {moonExpanded && (
+          <>
+            <div className="absolute inset-0 border border-blue-400/20 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
+            <div className="absolute inset-4 border border-purple-400/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
+          </>
+        )}
       </div>
-    </div>
-    </div>
-    </div>
+
+      {/* Background Enhancement */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-purple-950/20 pointer-events-none" />
     </div>
   );
-}
+};
+
+export default LandingPage;
