@@ -102,7 +102,7 @@ const LandingPage = () => {
       <div
         className={`relative transition-all duration-2000 ease-out ${
           moonExpanded
-            ? 'w-[250px] h-[250px] md:w-[500px] md:h-[500px]'
+            ? 'w-[350px] h-[350px] md:w-[500px] md:h-[500px]'
             : 'w-12 h-12'
         }`}
         style={{ zIndex: 5 }}
@@ -163,8 +163,8 @@ const LandingPage = () => {
 
 
               {/* Glowing Name */}
-              <div className="text-center mb-6 md:mb-8">
-                <h1 className="text-3xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent mb-3 md:mb-4">
+              <div className="text-center mb-2 md:mb-4 lg:mb-6">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent mb-3 md:mb-4">
                   {typedText}
                   <span className="animate-pulse">|</span>
                 </h1>

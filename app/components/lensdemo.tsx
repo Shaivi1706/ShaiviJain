@@ -39,13 +39,13 @@ const projects = [
 ];
 
   return (
-    <div>
-    <div className="grid grid-cols-3">
+    <div className="w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full mx-auto">
 
         {projects.map((proj, idx) => (
             <div
                 key={idx}
-                className="w-auto relative rounded-3xl overflow-hidden max-w-md mx-auto bg-gradient-to-r from-[#1D2235] to-[#121318] p-8 my-10"
+                className="w-full relative rounded-3xl overflow-hidden mx-auto bg-gradient-to-r from-[#1D2235] to-[#121318] p-8 my-10"
             >
                 <Rays />
                 <Beams />
@@ -76,7 +76,7 @@ const projects = [
                     </h2>
                     <p className="text-neutral-200 text-left mt-4">{proj.description}</p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-1 gap-3 mt-6">
                       {proj.list.map((item, i) => (
                         <span
                           key={i}
