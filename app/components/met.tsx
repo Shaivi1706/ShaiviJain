@@ -38,26 +38,30 @@ export function MeteorsDemo() {
     },
   ];
 
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
+useEffect(() => {
+  const scrollContainer = scrollRef.current;
+  if (!scrollContainer) return;
 
-    const scrollSpeed = 1;
-    const intervalTime = 30;
+  let animationFrameId: number;
+  const scrollSpeed = 2; 
 
-    const interval = setInterval(() => {
-      if (
-        scrollContainer.scrollLeft + scrollContainer.clientWidth >=
-        scrollContainer.scrollWidth
-      ) {
-        scrollContainer.scrollLeft = 0;
-      } else {
-        scrollContainer.scrollLeft += scrollSpeed;
-      }
-    }, intervalTime);
+  const smoothScroll = () => {
+    if (
+      scrollContainer.scrollLeft + scrollContainer.clientWidth >=
+      scrollContainer.scrollWidth
+    ) {
+      scrollContainer.scrollLeft = 0;
+    } else {
+      scrollContainer.scrollLeft += scrollSpeed;
+    }
 
-    return () => clearInterval(interval);
-  }, []);
+    animationFrameId = requestAnimationFrame(smoothScroll);
+  };
+
+  animationFrameId = requestAnimationFrame(smoothScroll);
+
+  return () => cancelAnimationFrame(animationFrameId);
+}, []);
 
   return (
     <div>
