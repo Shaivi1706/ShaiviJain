@@ -262,7 +262,7 @@ export function MeteorsDemo() {
         }
 
         .animate-scroll {
-          animation: scroll 30s linear infinite;
+          animation: scroll 20s linear infinite;
           width: max-content;
         }
 

@@ -1,40 +1,43 @@
 // "use client"
-// import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect, useCallback } from 'react';
 
 // const LandingPage = () => {
 //   const [moonExpanded, setMoonExpanded] = useState(false);
 //   const [textVisible, setTextVisible] = useState(false);
 //   const [typedText, setTypedText] = useState('');
-//   const [isClient, setIsClient] = useState(false);
 //   const fullText = "Hi, I'm Shaivi";
 //   const subtitle = "Crafting impactful digital experiences with precision, purpose, and passion. Explore a portfolio where design meets direction.";
 
-//   // Deterministic random values to prevent hydration mismatch
-//   const codeParticles = Array.from({ length: 12 }, (_, i) => ({
-//     left: (i * 7 + 13) % 100,
-//     top: (i * 11 + 7) % 100,
-//     delay: (i * 0.3) % 3,
-//     duration: 3 + (i % 3),
-//     symbol: ['{ }', '< />', '&&', '||', '=>', '!=', '==', 'fn()', '[]', '++'][i % 10]
-//   }));
-
-//   const moonParticles = Array.from({ length: 20 }, (_, i) => ({
+//   // Pre-generated deterministic particles (reduced from 20 to 8 for performance)
+//   const moonParticles = Array.from({ length: 8 }, (_, i) => ({
 //     top: (i * 13 + 17) % 100,
 //     left: (i * 19 + 23) % 100,
 //     delay: (i * 0.15) % 3,
 //     duration: 2 + (i % 3)
 //   }));
 
+//   // Memoized handlers to prevent re-renders
+//   const handleExploreClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.preventDefault();
+//     const projectsSection = document.getElementById('projects');
+//     if (projectsSection) {
+//       projectsSection.scrollIntoView({ behavior: 'smooth' });
+//     } else {
+//       console.log('Navigate to projects');
+//     }
+//   }, []);
+
+//   const handleSocialClick = useCallback((url: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+//     e.stopPropagation();
+//     window.open(url, '_blank');
+//   }, []);
+
 //   useEffect(() => {
-//     // Set client-side flag to prevent hydration mismatch
-//     setIsClient(true);
-    
-//     // Start moon expansion after component mounts
+//     // Optimized timing with requestAnimationFrame for smoother animations
 //     const moonTimer = setTimeout(() => {
 //       setMoonExpanded(true);
 //     }, 500);
 
-//     // Start text animation after moon expands
 //     const textTimer = setTimeout(() => {
 //       setTextVisible(true);
 //     }, 1500);
@@ -59,45 +62,10 @@
 
 //       return () => clearInterval(typeTimer);
 //     }
-//   }, [textVisible]);
-
-//   const handleExploreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-//     e.preventDefault();
-//     // Scroll to projects section or handle navigation
-//     const projectsSection = document.getElementById('projects');
-//     if (projectsSection) {
-//       projectsSection.scrollIntoView({ behavior: 'smooth' });
-//     } else {
-//       // If no projects section exists, you can add custom logic here
-//       console.log('Navigate to projects');
-//     }
-//   };
+//   }, [textVisible, fullText]);
 
 //   return (
 //     <div className="relative min-h-screen flex top-16 justify-center overflow-hidden">
-//       {/* Floating Code Particles */}
-//       {isClient && (
-//         <div
-//           className="absolute inset-0"
-//           style={{ pointerEvents: 'none', zIndex: 1 }}
-//         >
-//           {codeParticles.map((particle, i) => (
-//             <div
-//               key={i}
-//               className="absolute text-blue-300/20 text-xs font-mono animate-pulse"
-//               style={{
-//                 left: `${particle.left}%`,
-//                 top: `${particle.top}%`,
-//                 animationDelay: `${particle.delay}s`,
-//                 animationDuration: `${particle.duration}s`
-//               }}
-//             >
-//               {particle.symbol}
-//             </div>
-//           ))}
-//         </div>
-//       )}
-
 //       {/* Main Moon Element */}
 //       <div
 //         className={`relative transition-all duration-2000 ease-out ${
@@ -107,12 +75,12 @@
 //         }`}
 //         style={{ zIndex: 5 }}
 //       >
-//         {/* Moon Glow */}
+//         {/* Moon Glow - Simplified gradient for better performance */}
 //         <div
 //           className={`absolute inset-0 rounded-full transition-all duration-2000 ease-out ${
 //             moonExpanded
-//               ? 'bg-gradient-radial from-blue-400/30 via-purple-500/20 to-transparent blur-xl'
-//               : 'bg-blue-400/50 blur-sm'
+//               ? 'blur-xl'
+//               : 'blur-sm'
 //           }`}
 //           style={{
 //             background: moonExpanded
@@ -125,7 +93,7 @@
 //         <div
 //           className={`relative rounded-full transition-all duration-2000 ease-out overflow-hidden ${
 //             moonExpanded
-//               ? 'bg-gradient-radial from-slate-900/80 via-slate-800/60 to-transparent backdrop-blur-sm'
+//               ? 'backdrop-blur-sm'
 //               : 'bg-blue-400'
 //           }`}
 //           style={{
@@ -136,7 +104,6 @@
 //               : 'radial-gradient(circle, #60a5fa 0%, #3b82f6 100%)',
 //             pointerEvents: 'auto',
 //             zIndex: 40,
-//             // Enhanced double border effect
 //             border: moonExpanded 
 //               ? '2px solid transparent'
 //               : 'none',
@@ -157,11 +124,9 @@
 //               className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8"
 //               style={{
 //                 pointerEvents: 'auto',
-//                 zIndex: 50, // way high to be safe
+//                 zIndex: 50,
 //               }}
 //             >
-
-
 //               {/* Glowing Name */}
 //               <div className="text-center mb-2 md:mb-4 lg:mb-6">
 //                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent mb-3 md:mb-4">
@@ -182,7 +147,7 @@
 //                 {/* Gradient Explore Button */}
 //                 <button
 //                   onClick={handleExploreClick}
-//                   className={`mt-4 md:mt-8  inline-block px-4 md:px-6 py-2 text-sm md:text-base text-white font-semibold rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-600 hover:from-indigo-500 hover:to-purple-700 transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-105 ${
+//                   className={`mt-4 md:mt-8 inline-block px-4 md:px-6 py-2 text-sm md:text-base text-white font-semibold rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-600 hover:from-indigo-500 hover:to-purple-700 transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-105 ${
 //                     typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
 //                   }`}
 //                   style={{ transitionDelay: '1.5s', position: 'relative', zIndex: 10 }}
@@ -190,9 +155,11 @@
 //                   Explore My Work
 //                 </button>
 
-//                 {/* Social Icons */}
-//                <div 
-//                   className="mt-4 md:mt-6 flex gap-4 md:gap-6 justify-center transition-all duration-1000"
+//                 {/* Social Icons - Optimized with memoized handlers */}
+//                 <div 
+//                   className={`mt-4 md:mt-6 flex gap-4 md:gap-6 justify-center transition-all duration-1000 ${
+//                     typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+//                   }`}
 //                   style={{ transitionDelay: '2s', position: 'relative', zIndex: 10 }}
 //                 >
 //                   {/* GitHub */}
@@ -202,10 +169,7 @@
 //                     rel="noopener noreferrer"
 //                     className="text-blue-200 hover:text-white transition-all duration-300 transform hover:scale-110 hover:rotate-12 cursor-pointer relative z-50"
 //                     aria-label="GitHub Profile"
-//                     onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-//                       e.stopPropagation();
-//                       window.open('https://github.com/Shaivi1706', '_blank');
-//                     }}
+//                     onClick={handleSocialClick('https://github.com/Shaivi1706')}
 //                   >
 //                     <svg
 //                       xmlns="http://www.w3.org/2000/svg"
@@ -219,15 +183,12 @@
 
 //                   {/* LinkedIn */}
 //                   <a
-//                     href="https://linkedin.com/in/shaivijain"
+//                     href="https://www.linkedin.com/in/shaivi-jain/"
 //                     target="_blank"
 //                     rel="noopener noreferrer"
 //                     className="text-blue-200 hover:text-white transition-all duration-300 transform hover:scale-110 hover:rotate-12 cursor-pointer relative z-50"
 //                     aria-label="LinkedIn Profile"
-//                     onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-//                       e.stopPropagation();
-//                       window.open('https://www.linkedin.com/in/shaivi-jain/', '_blank');
-//                     }}
+//                     onClick={handleSocialClick('https://www.linkedin.com/in/shaivi-jain/')}
 //                   >
 //                     <svg
 //                       xmlns="http://www.w3.org/2000/svg"
@@ -241,15 +202,12 @@
 
 //                   {/* Twitter / X */}
 //                   <a
-//                     href="https://twitter.com/shaivijain"
+//                     href="https://x.com/ShaiviJain17"
 //                     target="_blank"
 //                     rel="noopener noreferrer"
 //                     className="text-blue-200 hover:text-white transition-all duration-300 transform hover:scale-110 hover:rotate-12 cursor-pointer relative z-50"
 //                     aria-label="Twitter Profile"
-//                     onClick={(e) => {
-//                       e.stopPropagation();
-//                       window.open('https://x.com/ShaiviJain17', '_blank');
-//                     }}
+//                     onClick={handleSocialClick('https://x.com/ShaiviJain17')}
 //                   >
 //                     <svg
 //                       xmlns="http://www.w3.org/2000/svg"
@@ -265,15 +223,15 @@
 //             </div>
 //           )}
 
-//           {/* Moon Surface Details (when expanded) */}
+//           {/* Moon Surface Details (when expanded) - Simplified */}
 //           {moonExpanded && (
 //             <>
-//               {/* Crater effects */}
+//               {/* Crater effects - Reduced and optimized */}
 //               <div className="absolute top-1/4 left-1/3 w-8 h-8 bg-slate-700/40 rounded-full blur-sm" />
 //               <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-slate-700/30 rounded-full blur-sm" />
 //               <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-slate-700/50 rounded-full blur-sm" />
               
-//               {/* Particle effects around moon */}
+//               {/* Reduced particle effects for better performance */}
 //               {moonParticles.map((particle, i) => (
 //                 <div
 //                   key={i}
@@ -290,21 +248,33 @@
 //           )}
 //         </div>
 
-//         {/* Orbital Rings */}
+//         {/* Orbital Rings - Will-change added for GPU acceleration */}
 //         {moonExpanded && (
 //           <>
-//             <div className="absolute inset-0 border border-blue-400/20 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
-//             <div className="absolute inset-4 border border-purple-400/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
+//             <div 
+//               className="absolute inset-0 border border-blue-400/20 rounded-full animate-spin" 
+//               style={{ 
+//                 animationDuration: '20s',
+//                 willChange: 'transform'
+//               }} 
+//             />
+//             <div 
+//               className="absolute inset-4 border border-purple-400/20 rounded-full animate-spin" 
+//               style={{ 
+//                 animationDuration: '15s', 
+//                 animationDirection: 'reverse',
+//                 willChange: 'transform'
+//               }} 
+//             />
 //           </>
 //         )}
 //       </div>
 
 //       {/* Background Enhancement */}
 //       <div
-//       className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-purple-950/20"
-//       style={{ zIndex: 0, pointerEvents: 'none' }}
-//     />
-
+//         className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-purple-950/20"
+//         style={{ zIndex: 0, pointerEvents: 'none' }}
+//       />
 //     </div>
 //   );
 // };
@@ -346,14 +316,14 @@ const LandingPage = () => {
   }, []);
 
   useEffect(() => {
-    // Optimized timing with requestAnimationFrame for smoother animations
+    // Smoother timing with slightly delayed start for more natural feel
     const moonTimer = setTimeout(() => {
       setMoonExpanded(true);
-    }, 500);
+    }, 800);
 
     const textTimer = setTimeout(() => {
       setTextVisible(true);
-    }, 1500);
+    }, 2300); // Adjusted to sync better with moon expansion
 
     return () => {
       clearTimeout(moonTimer);
@@ -371,7 +341,7 @@ const LandingPage = () => {
         } else {
           clearInterval(typeTimer);
         }
-      }, 100);
+      }, 120); // Slightly slower typing for better rhythm
 
       return () => clearInterval(typeTimer);
     }
@@ -381,30 +351,38 @@ const LandingPage = () => {
     <div className="relative min-h-screen flex top-16 justify-center overflow-hidden">
       {/* Main Moon Element */}
       <div
-        className={`relative transition-all duration-2000 ease-out ${
+        className={`relative transition-all ease-out ${
           moonExpanded
             ? 'w-[350px] h-[350px] md:w-[500px] md:h-[500px]'
             : 'w-12 h-12'
         }`}
-        style={{ zIndex: 5 }}
+        style={{ 
+          zIndex: 5,
+          transitionDuration: '3000ms', // Slower expansion
+          transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)', // Custom smooth easing
+          transform: moonExpanded ? 'scale(1)' : 'scale(0.8)', // Add subtle scale effect
+        }}
       >
-        {/* Moon Glow - Simplified gradient for better performance */}
+        {/* Moon Glow - Enhanced with smoother transitions */}
         <div
-          className={`absolute inset-0 rounded-full transition-all duration-2000 ease-out ${
+          className={`absolute inset-0 rounded-full transition-all ease-out ${
             moonExpanded
-              ? 'blur-xl'
-              : 'blur-sm'
+              ? 'blur-xl opacity-100'
+              : 'blur-sm opacity-80'
           }`}
           style={{
+            transitionDuration: '3500ms', // Slightly longer for glow
+            transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
             background: moonExpanded
-              ? 'radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, rgba(147, 51, 234, 0.2) 40%, transparent 70%)'
-              : 'radial-gradient(circle, rgba(96, 165, 250, 0.8) 0%, transparent 70%)'
+              ? 'radial-gradient(circle, rgba(96, 165, 250, 0.4) 0%, rgba(147, 51, 234, 0.25) 40%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(96, 165, 250, 0.8) 0%, transparent 70%)',
+            transform: moonExpanded ? 'scale(1.1)' : 'scale(1)', // Glow expands slightly more
           }}
         />
 
         {/* Moon Surface */}
         <div
-          className={`relative rounded-full transition-all duration-2000 ease-out overflow-hidden ${
+          className={`relative rounded-full transition-all ease-out overflow-hidden ${
             moonExpanded
               ? 'backdrop-blur-sm'
               : 'bg-blue-400'
@@ -412,6 +390,8 @@ const LandingPage = () => {
           style={{
             width: '100%',
             height: '100%',
+            transitionDuration: '3000ms',
+            transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
             background: moonExpanded
               ? 'radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, rgba(15, 23, 42, 0.8) 40%, rgba(15, 23, 42, 0.9) 100%)'
               : 'radial-gradient(circle, #60a5fa 0%, #3b82f6 100%)',
@@ -428,61 +408,99 @@ const LandingPage = () => {
                 0 0 20px rgba(96, 165, 250, 0.2),
                 inset 0 0 20px rgba(59, 130, 246, 0.1)
               `
-              : 'none'
+              : 'none',
+            transitionProperty: 'all, box-shadow',
           }}
         >
-          {/* Content Container */}
+          {/* Content Container with staggered entrance */}
           {moonExpanded && (
             <div
               className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8"
               style={{
                 pointerEvents: 'auto',
                 zIndex: 50,
+                opacity: textVisible ? 1 : 0,
+                transform: textVisible ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                transitionDelay: '500ms', // Delay content appearance
               }}
             >
-              {/* Glowing Name */}
+              {/* Glowing Name with smoother entrance */}
               <div className="text-center mb-2 md:mb-4 lg:mb-6">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent mb-3 md:mb-4">
+                <h1 
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-300 bg-clip-text text-transparent mb-3 md:mb-4"
+                  style={{
+                    opacity: textVisible ? 1 : 0,
+                    transform: textVisible ? 'translateY(0)' : 'translateY(30px)',
+                    transition: 'opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transitionDelay: '200ms',
+                  }}
+                >
                   {typedText}
                   <span className="animate-pulse">|</span>
                 </h1>
                 
-                {/* Subtitle with delay */}
+                {/* Subtitle with enhanced smooth delay */}
                 <p
-                  className={`text-sm md:text-xl text-blue-200/80 max-w-xs md:max-w-2xl leading-relaxed transition-all duration-1000 px-2 ${
-                    typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  className={`text-sm md:text-xl text-blue-200/80 max-w-xs md:max-w-2xl leading-relaxed px-2 ${
+                    typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                   }`}
-                  style={{ transitionDelay: '1s' }}
+                  style={{ 
+                    transition: 'opacity 1200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transitionDelay: '1200ms'
+                  }}
                 >
                   {subtitle}
                 </p>
 
-                {/* Gradient Explore Button */}
+                {/* Gradient Explore Button with bounce effect */}
                 <button
                   onClick={handleExploreClick}
-                  className={`mt-4 md:mt-8 inline-block px-4 md:px-6 py-2 text-sm md:text-base text-white font-semibold rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-600 hover:from-indigo-500 hover:to-purple-700 transition-all duration-300 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-105 ${
-                    typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  className={`mt-4 md:mt-8 inline-block px-4 md:px-6 py-2 text-sm md:text-base text-white font-semibold rounded-full bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-600 hover:from-indigo-500 hover:to-purple-700 shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-105 ${
+                    typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
-                  style={{ transitionDelay: '1.5s', position: 'relative', zIndex: 10 }}
+                  style={{ 
+                    transition: 'all 600ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transitionDelay: '1800ms',
+                    position: 'relative', 
+                    zIndex: 10 
+                  }}
                 >
                   Explore My Work
                 </button>
 
-                {/* Social Icons - Optimized with memoized handlers */}
+                {/* Social Icons with staggered smooth entrance */}
                 <div 
-                  className={`mt-4 md:mt-6 flex gap-4 md:gap-6 justify-center transition-all duration-1000 ${
-                    typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  className={`mt-4 md:mt-6 flex gap-4 md:gap-6 justify-center ${
+                    typedText === fullText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
-                  style={{ transitionDelay: '2s', position: 'relative', zIndex: 10 }}
+                  style={{ 
+                    transition: 'opacity 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    transitionDelay: '2200ms',
+                    position: 'relative', 
+                    zIndex: 10 
+                  }}
                 >
                   {/* GitHub */}
                   <a
                     href="https://github.com/Shaivi1706"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-200 hover:text-white transition-all duration-300 transform hover:scale-110 hover:rotate-12 cursor-pointer relative z-50"
+                    className="text-blue-200 hover:text-white cursor-pointer relative z-50"
                     aria-label="GitHub Profile"
                     onClick={handleSocialClick('https://github.com/Shaivi1706')}
+                    style={{
+                      transition: 'all 400ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+                      opacity: typedText === fullText ? 1 : 0,
+                      transform: typedText === fullText ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.8)',
+                      transitionDelay: '2400ms',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px) scale(1.1) rotate(12deg)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -499,9 +517,21 @@ const LandingPage = () => {
                     href="https://www.linkedin.com/in/shaivi-jain/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-200 hover:text-white transition-all duration-300 transform hover:scale-110 hover:rotate-12 cursor-pointer relative z-50"
+                    className="text-blue-200 hover:text-white cursor-pointer relative z-50"
                     aria-label="LinkedIn Profile"
                     onClick={handleSocialClick('https://www.linkedin.com/in/shaivi-jain/')}
+                    style={{
+                      transition: 'all 400ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+                      opacity: typedText === fullText ? 1 : 0,
+                      transform: typedText === fullText ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.8)',
+                      transitionDelay: '2600ms',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px) scale(1.1) rotate(12deg)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -518,9 +548,21 @@ const LandingPage = () => {
                     href="https://x.com/ShaiviJain17"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-200 hover:text-white transition-all duration-300 transform hover:scale-110 hover:rotate-12 cursor-pointer relative z-50"
+                    className="text-blue-200 hover:text-white cursor-pointer relative z-50"
                     aria-label="Twitter Profile"
                     onClick={handleSocialClick('https://x.com/ShaiviJain17')}
+                    style={{
+                      transition: 'all 400ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+                      opacity: typedText === fullText ? 1 : 0,
+                      transform: typedText === fullText ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.8)',
+                      transitionDelay: '2800ms',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px) scale(1.1) rotate(12deg)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -536,24 +578,44 @@ const LandingPage = () => {
             </div>
           )}
 
-          {/* Moon Surface Details (when expanded) - Simplified */}
+          {/* Moon Surface Details (when expanded) - With smoother entrance */}
           {moonExpanded && (
             <>
-              {/* Crater effects - Reduced and optimized */}
-              <div className="absolute top-1/4 left-1/3 w-8 h-8 bg-slate-700/40 rounded-full blur-sm" />
-              <div className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-slate-700/30 rounded-full blur-sm" />
-              <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-slate-700/50 rounded-full blur-sm" />
+              {/* Crater effects - Smooth fade-in */}
+              <div 
+                className="absolute top-1/4 left-1/3 w-8 h-8 bg-slate-700/40 rounded-full blur-sm transition-opacity duration-2000 ease-out"
+                style={{ 
+                  opacity: moonExpanded ? 0.6 : 0,
+                  transitionDelay: '1000ms'
+                }}
+              />
+              <div 
+                className="absolute bottom-1/3 right-1/4 w-6 h-6 bg-slate-700/30 rounded-full blur-sm transition-opacity duration-2000 ease-out"
+                style={{ 
+                  opacity: moonExpanded ? 0.5 : 0,
+                  transitionDelay: '1200ms'
+                }}
+              />
+              <div 
+                className="absolute top-1/2 right-1/3 w-4 h-4 bg-slate-700/50 rounded-full blur-sm transition-opacity duration-2000 ease-out"
+                style={{ 
+                  opacity: moonExpanded ? 0.7 : 0,
+                  transitionDelay: '1400ms'
+                }}
+              />
               
-              {/* Reduced particle effects for better performance */}
+              {/* Enhanced particle effects with smoother entrance */}
               {moonParticles.map((particle, i) => (
                 <div
                   key={i}
-                  className="absolute w-1 h-1 bg-blue-400/60 rounded-full animate-pulse"
+                  className="absolute w-1 h-1 bg-blue-400/60 rounded-full animate-pulse transition-opacity duration-1000 ease-out"
                   style={{
                     top: `${particle.top}%`,
                     left: `${particle.left}%`,
                     animationDelay: `${particle.delay}s`,
-                    animationDuration: `${particle.duration}s`
+                    animationDuration: `${particle.duration}s`,
+                    opacity: moonExpanded ? 0.8 : 0,
+                    transitionDelay: `${1600 + i * 100}ms`
                   }}
                 />
               ))}
@@ -561,32 +623,40 @@ const LandingPage = () => {
           )}
         </div>
 
-        {/* Orbital Rings - Will-change added for GPU acceleration */}
+        {/* Orbital Rings - Enhanced with smoother rotation and entrance */}
         {moonExpanded && (
           <>
             <div 
-              className="absolute inset-0 border border-blue-400/20 rounded-full animate-spin" 
+              className="absolute inset-0 border border-blue-400/20 rounded-full animate-spin transition-opacity duration-2000 ease-out" 
               style={{ 
                 animationDuration: '20s',
-                willChange: 'transform'
+                willChange: 'transform',
+                opacity: moonExpanded ? 0.6 : 0,
+                transitionDelay: '2000ms'
               }} 
             />
             <div 
-              className="absolute inset-4 border border-purple-400/20 rounded-full animate-spin" 
+              className="absolute inset-4 border border-purple-400/20 rounded-full animate-spin transition-opacity duration-2000 ease-out" 
               style={{ 
                 animationDuration: '15s', 
                 animationDirection: 'reverse',
-                willChange: 'transform'
+                willChange: 'transform',
+                opacity: moonExpanded ? 0.4 : 0,
+                transitionDelay: '2500ms'
               }} 
             />
           </>
         )}
       </div>
 
-      {/* Background Enhancement */}
+      {/* Background Enhancement with smoother fade */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-purple-950/20"
-        style={{ zIndex: 0, pointerEvents: 'none' }}
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-purple-950/20 transition-opacity duration-4000 ease-out"
+        style={{ 
+          zIndex: 0, 
+          pointerEvents: 'none',
+          opacity: moonExpanded ? 1 : 0.3
+        }}
       />
     </div>
   );
