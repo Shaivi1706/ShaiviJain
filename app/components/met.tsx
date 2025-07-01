@@ -43,7 +43,7 @@ useEffect(() => {
   if (!scrollContainer) return;
 
   let animationFrameId: number;
-  const scrollSpeed = 2; 
+  const scrollSpeed = 2.5; 
 
   const smoothScroll = () => {
     if (
