@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Mail, Github, Linkedin, MapPin, Send, CheckCircle, X } from "lucide-react";
+import emailjs from "emailjs-com";
 
 // Type definitions
 interface FormData {
@@ -51,20 +52,40 @@ export default function Contact() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setShowSuccess(true);
-      setFormData({ name: "", email: "", message: "" });
-      setIsSubmitting(false);
-    }, 2000);
+const handleSubmit = async (
+  e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
+) => {
+  e.preventDefault();
+
+  if (!validateForm()) return;
+
+  setIsSubmitting(true);
+
+  const templateParams = {
+    from_name: formData.name,
+    from_email: formData.email,
+    message: formData.message,
   };
+
+  try {
+    const result = await emailjs.send(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      templateParams,
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    );
+
+    console.log("Email sent:", result.text);
+
+    setShowSuccess(true);
+    setFormData({ name: "", email: "", message: "" });
+  } catch (error) {
+    console.error("EmailJS Error:", error);
+    alert("Oops! Something went wrong. Try again later.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const contactInfo: ContactInfo[] = [
     {
