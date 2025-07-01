@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Lens } from "../components/ui/lens";
+import Image from "next/image";
 
 import { motion } from "motion/react";
 import { cn } from "../lib/utils";
@@ -58,10 +59,12 @@ const projects = [
                     height={200}
                     className="rounded-2xl"
                     /> */}
-                    <img
+                    <Image
                       src={proj.image}
                       alt={proj.title}
                       className="rounded-xl h-40 w-full object-cover"
+                      width={500}
+                      height={200}
                     />
 
                 </Lens>
