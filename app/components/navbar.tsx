@@ -61,7 +61,7 @@ export function NavbarDemo() {
             ))}
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                href="https://drive.google.com/file/d/1fEeQyKf0ZtkxnNtKRQX3xqVxQVEAlYgs/view?usp=sharing" variant="primary"
+                href="https://drive.google.com/file/d/1o6yHFLXbmutpj6_IXB7pCqs-FyWmISJI/view?usp=share_link" variant="primary"
                 className="w-full"
               >
                 Resume

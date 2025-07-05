@@ -163,7 +163,7 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <a
-              href="https://drive.google.com/file/d/1fEeQyKf0ZtkxnNtKRQX3xqVxQVEAlYgs/view?usp=share_link"
+              href="https://drive.google.com/file/d/1o6yHFLXbmutpj6_IXB7pCqs-FyWmISJI/view?usp=share_link"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-10 py-4 rounded-2xl font-semibold overflow-hidden shadow-2xl shadow-blue-500/50 hover:shadow-purple-500/50 transition-all duration-300 transform hover:-translate-y-2 inline-flex items-center gap-3 text-lg border border-white/20"

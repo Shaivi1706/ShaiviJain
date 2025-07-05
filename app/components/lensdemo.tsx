@@ -52,13 +52,6 @@ const projects = [
                 <Beams />
                 <div className="relative z-10">
                 <Lens hovering={hovering} setHovering={setHovering}>
-                    {/* <img
-                    src={proj.image}
-                    alt={proj.title}
-                    width={500}
-                    height={200}
-                    className="rounded-2xl"
-                    /> */}
                     <Image
                       src={proj.image}
                       alt={proj.title}

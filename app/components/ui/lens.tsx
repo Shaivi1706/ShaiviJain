@@ -42,6 +42,7 @@ export const Lens: React.FC<LensProps> = ({
   };
 
   return (
+    
     <div
       ref={containerRef}
       className="relative overflow-hidden rounded-lg z-20 w-full h-full"
