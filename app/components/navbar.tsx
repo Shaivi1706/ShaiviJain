@@ -32,7 +32,7 @@ export function NavbarDemo() {
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
             {/* <NavbarButton variant="secondary">Login</NavbarButton> */}
-              <NavbarButton href="https://drive.google.com/file/d/1fEeQyKf0ZtkxnNtKRQX3xqVxQVEAlYgs/view?usp=sharing" variant="primary">Resume</NavbarButton>
+              <NavbarButton href="https://drive.google.com/file/d/1o6yHFLXbmutpj6_IXB7pCqs-FyWmISJI/view?usp=share_link" variant="primary">Resume</NavbarButton>
           </div>
         </NavBody>
 
