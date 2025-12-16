@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Mail, Github, Linkedin, MapPin, Send, CheckCircle, X } from "lucide-react";
-import emailjs from "emailjs-com";
+import { Mail, Github, Linkedin, MapPin, Send, CheckCircle, X, Code } from "lucide-react";
 
 // Type definitions
 interface FormData {
@@ -61,30 +60,12 @@ const handleSubmit = async (
 
   setIsSubmitting(true);
 
-  const templateParams = {
-    from_name: formData.name,
-    from_email: formData.email,
-    message: formData.message,
-  };
-
-  try {
-    const result = await emailjs.send(
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-      templateParams,
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-    );
-
-    console.log("Email sent:", result.text);
-
+  // Simulate email sending (replace with your actual email service)
+  setTimeout(() => {
     setShowSuccess(true);
     setFormData({ name: "", email: "", message: "" });
-  } catch (error) {
-    console.error("EmailJS Error:", error);
-    alert("Oops! Something went wrong. Try again later.");
-  } finally {
     setIsSubmitting(false);
-  }
+  }, 1500);
 };
 
   const contactInfo: ContactInfo[] = [
@@ -95,16 +76,22 @@ const handleSubmit = async (
       href: "mailto:shaivicseai@gmail.com"
     },
     {
-      icon: Github,
-      label: "GitHub",
-      value: "Shaivi1706",
-      href: "https://github.com/shaivi1706"
-    },
-    {
       icon: Linkedin,
       label: "LinkedIn",
       value: "Shaivi Jain",
       href: "https://linkedin.com/in/shaivi-jain"
+    },
+    {
+      icon: Code,
+      label: "Codolio",
+      value: "Shaivi",
+      href: "https://codolio.com/profile/Shaivi"
+    },
+    {
+      icon: Github,
+      label: "GitHub",
+      value: "Shaivi1706",
+      href: "https://github.com/shaivi1706"
     },
     {
       icon: MapPin,
@@ -185,15 +172,6 @@ const handleSubmit = async (
               })}
             </div>
 
-            <div className="p-6 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 border border-blue-400/30" style={{
-              background: 'linear-gradient(135deg, rgba(96, 165, 250, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%)',
-              boxShadow: 'inset 0 1px 0 rgba(96, 165, 250, 0.2)'
-            }}>
-              <h3 className="font-semibold mb-2 text-blue-200">Quick Response</h3>
-              <p className="text-sm text-blue-200/70">
-                I typically respond within 24 hours. For urgent matters, feel free to reach out directly via email.
-              </p>
-            </div>
           </div>
 
           {/* Contact Form */}
@@ -247,7 +225,7 @@ const handleSubmit = async (
                 value={formData.message}
                 onChange={handleInputChange}
                 placeholder="Tell me about your project, ideas, or just say hello..."
-                rows={5}
+                rows={4}
                 className={`w-full px-4 py-4 rounded-xl bg-slate-900/40 border transition-all duration-300 focus:outline-none focus:ring-2 resize-none text-blue-100 placeholder-blue-300/50 ${
                   errors.message 
                     ? 'border-red-400/50 focus:ring-red-400/30 focus:border-red-400/50' 
@@ -281,6 +259,16 @@ const handleSubmit = async (
             <p className="text-sm text-blue-200/60 text-center">
               Your message will be sent directly to my email. I&apos;ll get back to you soon!
             </p>
+
+            <div className="p-6 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 border border-blue-400/30" style={{
+              background: 'linear-gradient(135deg, rgba(96, 165, 250, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%)',
+              boxShadow: 'inset 0 1px 0 rgba(96, 165, 250, 0.2)'
+            }}>
+              <h3 className="font-semibold mb-2 text-blue-200">Quick Response</h3>
+              <p className="text-sm text-blue-200/70">
+                I typically respond within 24 hours. For urgent matters, feel free to reach out directly via email.
+              </p>
+            </div>
           </div>
         </div>
       </section>

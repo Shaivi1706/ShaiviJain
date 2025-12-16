@@ -32,7 +32,7 @@ export function NavbarDemo() {
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
             {/* <NavbarButton variant="secondary">Login</NavbarButton> */}
-              <NavbarButton href="https://drive.google.com/file/d/1ibg1T-vLHAiKNeBWF4fGD0uqRCvXF__4/view?usp=sharing" variant="primary">Resume</NavbarButton>
+              <NavbarButton href="https://drive.google.com/file/d/18Xzb4tBb6wip2ZUh9UQmjcUGgxljntKD/view?usp=sharing" variant="primary">Resume</NavbarButton>
           </div>
         </NavBody>
 
@@ -61,7 +61,7 @@ export function NavbarDemo() {
             ))}
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                href="https://drive.google.com/file/d/1ibg1T-vLHAiKNeBWF4fGD0uqRCvXF__4/view?usp=sharing" variant="primary"
+                href="https://drive.google.com/file/d/18Xzb4tBb6wip2ZUh9UQmjcUGgxljntKD/view?usp=sharing" variant="primary"
                 className="w-full"
               >
                 Resume

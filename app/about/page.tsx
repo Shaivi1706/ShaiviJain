@@ -70,11 +70,11 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="space-y-4 text-sm lg:text-[14px] leading-relaxed text-gray-200 backdrop-blur-sm bg-black/20 rounded-2xl p-6 border border-white/10"
+            className="text-base lg:text-lg leading-normal text-gray-200 backdrop-blur-sm bg-black/20 rounded-2xl p-5 border border-white/10"
           >
             <p>
               I&apos;m{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent font-bold text-xl lg:text-2xl animate-glow">
+              <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent font-bold text-2xl lg:text-3xl animate-glow">
                 Shaivi Jain
               </span>
               , a{" "}
@@ -143,6 +143,17 @@ export default function About() {
               <span className="inline-block animate-pulse text-2xl">🌌</span>
             
             <br/>
+              {/* If you&apos;re into{" "}
+              <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent font-semibold">
+                thoughtful tech
+              </span>
+              ,{" "}
+              <span className="bg-gradient-to-r from-pink-300 to-red-300 bg-clip-text text-transparent font-semibold">
+                purpose-driven design
+              </span>
+              , or just good conversation. 
+              Let&apos;s connect.{" "} */}
+
               If you&apos;re into{" "}
               <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent font-semibold">
                 thoughtful tech
@@ -151,7 +162,24 @@ export default function About() {
               <span className="bg-gradient-to-r from-pink-300 to-red-300 bg-clip-text text-transparent font-semibold">
                 purpose-driven design
               </span>
-              , or just good conversation — let&apos;s connect.{" "}
+              , or just good conversation.
+              <br />
+
+              <span className="block">
+                Let&apos;s connect on{" "}
+                <a
+                  href="https://codolio.com/profile/Shaivi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative text-xl lg:text-2xl inline-block font-semibold underline underline-offset-4 
+                            bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 
+                            bg-clip-text text-transparent animate-glow
+                            hover:from-pink-300 hover:to-purple-300 transition-all duration-300"
+                >
+                  Codolio
+                </a>
+                .
+              </span>
             </p>
           </motion.div>
 
@@ -163,7 +191,7 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <a
-              href="https://drive.google.com/file/d/1ibg1T-vLHAiKNeBWF4fGD0uqRCvXF__4/view?usp=sharing"
+              href="https://drive.google.com/file/d/18Xzb4tBb6wip2ZUh9UQmjcUGgxljntKD/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-10 py-4 rounded-2xl font-semibold overflow-hidden shadow-2xl shadow-blue-500/50 hover:shadow-purple-500/50 transition-all duration-300 transform hover:-translate-y-2 inline-flex items-center gap-3 text-lg border border-white/20"
